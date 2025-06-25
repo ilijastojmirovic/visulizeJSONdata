@@ -1,0 +1,26 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h2>Employee Summary</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Total Hours</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var emp in Model.Employees)
+    {
+        var rowColor = emp.TotalHours < 100 ? "style='background-color: lightcoral;'" : "";
+        <tr @Html.Raw(rowColor)>
+            <td>@emp.Employee</td>
+            <td>@emp.TotalHours.ToString("F2")</td>
+        </tr>
+    }
+    </tbody>
+</table>
