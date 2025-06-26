@@ -15,7 +15,7 @@ public class ChartModel : PageModel
 
     public IActionResult OnGet()
     {
-        return Page(); // samo da prikaže .cshtml stranicu gde ćemo prikazati sliku
+        return Page();
     }
 
     public async Task<IActionResult> OnGetImageAsync()
@@ -26,17 +26,16 @@ public class ChartModel : PageModel
         var values = data.Select(e => e.TotalHours).ToArray();
         
         var plt = new ScottPlot.Plot(800, 600);
-        // Koristi AddPie umesto PlotPie kako bi mogao da prikazuje procente
         var pie = plt.AddPie(values);
         pie.SliceLabels = labels;
         pie.ShowPercentages = true;
-        pie.ShowValues = true; // (opciono) prikazuje sate
-        pie.Explode = false;   // (opciono) možeš da staviš true za bolji vizuelni efekat
+        pie.ShowValues = true;
+        pie.Explode = false;
 
         plt.Legend();
         plt.Title("Percentage of Work Hours");
 
-        var image = plt.Render(); // Renderuje sliku kao Bitmap
+        var image = plt.Render();
 
         var stream = new MemoryStream();
         image.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
