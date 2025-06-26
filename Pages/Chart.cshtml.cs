@@ -29,7 +29,7 @@ public class ChartModel : PageModel
         var pie = plt.AddPie(values);
         pie.SliceLabels = labels;
         pie.ShowPercentages = true;
-        pie.ShowValues = true;
+        pie.ShowValues = false;
         pie.Explode = false;
 
         plt.Legend();
