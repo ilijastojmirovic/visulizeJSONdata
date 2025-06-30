@@ -1,5 +1,4 @@
-﻿@page
-@model IndexModel
+﻿@model List<VisualizeJSONData.Models.TimeEntrySummary>
 @{
     ViewData["Title"] = "Home page";
 }
@@ -14,7 +13,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var emp in Model.Employees)
+    @foreach (var emp in Model)
     {
         var rowColor = emp.TotalHours < 100 ? "style='background-color: lightcoral;'" : "";
         <tr @Html.Raw(rowColor)>

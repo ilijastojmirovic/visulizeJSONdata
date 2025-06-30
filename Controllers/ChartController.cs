@@ -1,30 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using VisualizeJSONData.Services;
 
-namespace VisualizeJSONData.Pages;
+namespace VisualizeJSONData.Controllers;
 
-public class ChartModel : PageModel
+public class ChartController : Controller
 {
     private readonly ITimeEntryService _service;
 
-    public ChartModel(ITimeEntryService service)
+    public ChartController(ITimeEntryService service)
     {
         _service = service;
     }
 
-    public IActionResult OnGet()
+    public IActionResult Index()
     {
-        return Page();
+        return View();
     }
 
-    public async Task<IActionResult> OnGetImageAsync()
+    public async Task<IActionResult> PieChartImage()
     {
         var data = await _service.GetSummarizedTimeEntriesAsync();
 
         var labels = data.Select(e => e.Employee).ToArray();
         var values = data.Select(e => e.TotalHours).ToArray();
-        
+
         var plt = new ScottPlot.Plot(800, 600);
         var pie = plt.AddPie(values);
         pie.SliceLabels = labels;
